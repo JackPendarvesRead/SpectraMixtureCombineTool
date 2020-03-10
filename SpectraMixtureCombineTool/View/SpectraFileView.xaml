@@ -32,9 +32,9 @@
                  MinWidth="200"/>
 
         <Label Grid.Row="2" Grid.Column="0" 
-               x:Name="ValueLabel" Content="Value:" />
+               x:Name="CoefficientLabel" Content="Coefficient:" />
         <TextBox Grid.Row="2" Grid.Column="1"
-                   x:Name="Value"  
+                   x:Name="Coefficient"  
                  MinWidth="200"/>
 
 

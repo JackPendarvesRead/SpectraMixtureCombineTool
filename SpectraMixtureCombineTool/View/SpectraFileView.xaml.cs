@@ -30,6 +30,16 @@ namespace SpectraMixtureCombineTool.View
                     vm => vm.FilePath,
                     view => view.FilePath.Text
                     ).DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                    vm => vm.Name,
+                    view => view.Name.Text
+                    ).DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                    vm => vm.Coefficient,
+                    view => view.Coefficient.Text
+                    ).DisposeWith(disposables);
             });
         }
     }

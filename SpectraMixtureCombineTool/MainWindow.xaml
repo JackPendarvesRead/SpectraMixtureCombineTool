@@ -12,11 +12,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <rxui:RoutedViewHost   
-           Grid.Row="0"
-            x:Name="RoutedViewHost"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch" />
+        <ListBox
+            x:Name="SpectraFilesListBox"
+            Height="auto"
+            Width="auto"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            HorizontalContentAlignment="Stretch"/>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal">
             <Button x:Name="AddButton" Content="Add" />

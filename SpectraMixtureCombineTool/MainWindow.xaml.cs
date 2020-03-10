@@ -30,13 +30,18 @@ namespace SpectraMixtureCombineTool
             this.WhenActivated((disposables) =>
             {
                 this.OneWayBind(ViewModel,
-                    vm => vm.Router,
-                    view => view.RoutedViewHost.Router
-                    ).DisposeWith(disposables);
+                   vm => vm.Files,
+                   view => view.SpectraFilesListBox.ItemsSource
+                   ).DisposeWith(disposables);
 
                 this.BindCommand(ViewModel,
                     vm => vm.AddSpectraFileCommand,
                     view => view.AddButton
+                    ).DisposeWith(disposables);
+
+                this.BindCommand(ViewModel,
+                    vm => vm.SaveCommand,
+                    view => view.SaveButton
                     ).DisposeWith(disposables);
             });
         }

@@ -26,7 +26,6 @@ namespace SpectraMixtureCombineTool
         {
             Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
             Locator.CurrentMutable.Register(() => new SpectraFileView(), typeof(IViewFor<SpectraFileViewModel>));
-            Locator.CurrentMutable.Register(() => new AddSpectraFilesView(), typeof(IViewFor<AddSpectraFilesViewModel>));
             base.OnStartup(e);
         }
     }
