@@ -2,10 +2,8 @@
 using SpectraMixtureCombineTool.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Disposables;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,29 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpectraMixtureCombineTool
+namespace SpectraMixtureCombineTool.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddSpectraFilesView.xaml
     /// </summary>
-    public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
+    public partial class AddSpectraFilesView : ReactiveUserControl<AddSpectraFilesViewModel>
     {
-        public MainWindow()
+        public AddSpectraFilesView()
         {
             InitializeComponent();
-            ViewModel = new MainWindowViewModel();
             this.WhenActivated((disposables) =>
             {
                 this.OneWayBind(ViewModel,
-                    vm => vm.Router,
-                    view => view.RoutedViewHost.Router
-                    ).DisposeWith(disposables);
-
-                this.BindCommand(ViewModel,
-                    vm => vm.AddSpectraFileCommand,
-                    view => view.AddButton
+                    vm => vm.Files,
+                    view => view.SpectraFilesListBox.ItemsSource
                     ).DisposeWith(disposables);
             });
         }
-    }
+    }    
 }
