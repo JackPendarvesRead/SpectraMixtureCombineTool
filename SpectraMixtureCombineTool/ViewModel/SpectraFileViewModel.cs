@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SpectraMixtureCombineTool.ViewModel
@@ -14,6 +15,7 @@ namespace SpectraMixtureCombineTool.ViewModel
         public SpectraFileViewModel(string filePath)
         {
             FilePath = filePath;
+            Name = Path.GetFileNameWithoutExtension(filePath);
         }
     }
 }
