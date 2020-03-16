@@ -15,6 +15,7 @@ namespace SpectraMixtureCombineTool.Model
         public ISpectrumData GetWeightedSpectra(IEnumerable<SpectraFileViewModel> files)
         {
             var spectra = ReadFiles(files);
+            ValidateSpectra(spectra);
             return AggregateSpectra(spectra);
         }
 
@@ -26,14 +27,39 @@ namespace SpectraMixtureCombineTool.Model
                 using (var stream = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Delete))
                 {
                     var spectrum = reader.ReadStream(stream).First();
+                    spectrum.SpectrumInformation.Add(file.Name, file.Coefficient);
+                    var data = new List<float>();
                     for (var i = 0; i < spectrum.Data.Count; i++)
                     {
-                        spectrum.Data[i] *= float.Parse(file.Coefficient);
+                        data.Add(spectrum.Data[i] * float.Parse(file.Coefficient));
                     }
-                    spectrum.SpectrumInformation.Add(file.Name, file.Coefficient);
-                    yield return spectrum;
+                    var weightedSpectrum = new SpectrumData
+                    {
+                        Data = data,
+                        SpectrumInformation = spectrum.SpectrumInformation,
+                        Wavelengths = spectrum.Wavelengths
+                    };
+                    yield return weightedSpectrum;
                 }
             }
+        }
+
+        private void ValidateSpectra(IEnumerable<ISpectrumData> data)
+        {
+            var wavelengths = data.Select(x => x.Wavelengths);
+
+            wavelengths.Aggregate((acc, next) =>
+            {
+                if (acc.Count != next.Count)
+                    throw new Exception("Wavelength counts do not match in files");
+
+                for(var i = 0; i < acc.Count; i++)
+                {
+                    if (acc[i] != next[i])
+                        throw new Exception("Wavelengths do not match. Check resolution or start/end wavelengths in files.");
+                }
+                return acc;
+            });
         }
 
         private ISpectrumData AggregateSpectra(IEnumerable<ISpectrumData> spectra)

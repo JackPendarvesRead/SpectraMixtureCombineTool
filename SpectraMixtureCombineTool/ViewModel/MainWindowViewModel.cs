@@ -1,9 +1,11 @@
 ﻿using DynamicData;
 using ReactiveUI;
+using SpectraMixtureCombineTool.Model;
 using SpectraMixtureCombineTool.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
@@ -33,23 +35,34 @@ namespace SpectraMixtureCombineTool.ViewModel
 
         private void SaveImpl()
         {
-            using(var sfd = new SaveFileDialog())
+            try
             {
-                if (ValidateCoefficients())
+                using (var sfd = new SaveFileDialog())
                 {
-                    if (sfd.ShowDialog() == DialogResult.OK)
+                    sfd.Filter = "JCAMP|*.jcm";
+                    if (ValidateCoefficients())
                     {
-                        foreach (var f in Files)
+                        if (sfd.ShowDialog() == DialogResult.OK)
                         {
-                            MessageBox.Show($"Name={f.Name}, Co={f.Coefficient}");
+                            var files = Files.ToArray();
+                            var converter = new SpectrumConverter();
+                            var weighted = converter.GetWeightedSpectra(files);
+                            var writer = new FileWriter();
+                            writer.WriteFile(sfd.FileName, weighted);
+                            writer.WriteTxtFile(sfd.FileName, files);
+                            MessageBox.Show("Save successful.");
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("Sum of coefficients must be equal to 1.0");
+                    }
+
                 }
-                else
-                {
-                    MessageBox.Show("Sum of coefficients must be equal to 1.0");
-                }
-               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -57,6 +70,7 @@ namespace SpectraMixtureCombineTool.ViewModel
         {
             using (var ofd = new OpenFileDialog())
             {
+                ofd.Filter = "Foss Spectra File|*.nir";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     cache.AddFile(ofd.FileName);

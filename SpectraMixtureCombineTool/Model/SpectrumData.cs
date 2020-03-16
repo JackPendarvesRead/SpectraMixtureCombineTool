@@ -26,6 +26,6 @@ namespace SpectraMixtureCombineTool.Model
                 }
             }
             return map;
-        }
+        }        
     }
 }
