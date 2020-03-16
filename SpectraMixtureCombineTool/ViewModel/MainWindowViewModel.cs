@@ -48,8 +48,8 @@ namespace SpectraMixtureCombineTool.ViewModel
                             var converter = new SpectrumConverter();
                             var weighted = converter.GetWeightedSpectra(files);
                             var writer = new FileWriter();
-                            writer.WriteFile(sfd.FileName, weighted);
                             writer.WriteTxtFile(sfd.FileName, files);
+                            writer.WriteFile(sfd.FileName, weighted);
                             MessageBox.Show("Save successful.");
                         }
                     }
