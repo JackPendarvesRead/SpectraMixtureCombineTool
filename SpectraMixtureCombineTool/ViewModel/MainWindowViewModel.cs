@@ -17,6 +17,7 @@ namespace SpectraMixtureCombineTool.ViewModel
     {
         public ReactiveCommand<Unit, Unit> AddSpectraFileCommand { get; set; }
         public ReactiveCommand<Unit, Unit> SaveCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> ClearCommand { get; set; }
 
         private readonly SpectraFileCache cache = new SpectraFileCache();
         private readonly ReadOnlyObservableCollection<SpectraFileViewModel> _files;
@@ -24,13 +25,19 @@ namespace SpectraMixtureCombineTool.ViewModel
 
         public MainWindowViewModel()
         {
-            AddSpectraFileCommand = ReactiveCommand.Create(AddSpectraFileImpl);
-            SaveCommand = ReactiveCommand.Create(SaveImpl);
-
             cache.Connect()
                 .Transform(x => new SpectraFileViewModel(x))
                 .Bind(out _files)
                 .Subscribe();
+
+            AddSpectraFileCommand = ReactiveCommand.Create(AddSpectraFileImpl);
+            SaveCommand = ReactiveCommand.Create(SaveImpl);
+            ClearCommand = ReactiveCommand.Create(ClearImpl);
+        }
+
+        private void ClearImpl()
+        {
+            cache.Clear();
         }
 
         private void SaveImpl()

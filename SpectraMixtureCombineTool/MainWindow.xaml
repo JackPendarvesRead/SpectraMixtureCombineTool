@@ -21,6 +21,7 @@
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal">
             <Button x:Name="AddButton" Content="Add" />
+            <Button x:Name="ClearButton" Content="Clear" />
             <Button x:Name="SaveButton" Content="Save" />
         </StackPanel>
     </Grid>

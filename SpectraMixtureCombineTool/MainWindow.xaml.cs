@@ -43,6 +43,11 @@ namespace SpectraMixtureCombineTool
                     vm => vm.SaveCommand,
                     view => view.SaveButton
                     ).DisposeWith(disposables);
+
+                this.BindCommand(ViewModel,
+                   vm => vm.ClearCommand,
+                   view => view.ClearButton
+                   ).DisposeWith(disposables);
             });
         }
     }

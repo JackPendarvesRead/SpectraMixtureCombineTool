@@ -14,5 +14,10 @@ namespace SpectraMixtureCombineTool.Service
         {
             files.AddOrUpdate(filePath);
         }
+
+        public void Clear()
+        {
+            files.Clear();
+        }
     }
 }
