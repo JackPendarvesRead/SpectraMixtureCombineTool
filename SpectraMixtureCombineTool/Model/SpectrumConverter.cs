@@ -1,5 +1,6 @@
 ﻿using Aunir.SpectrumAnalysis2.FossConnector;
 using Aunir.SpectrumAnalysis2.Interfaces;
+using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.JcampConnector;
 using SpectraMixtureCombineTool.ViewModel;
 using System;
@@ -12,14 +13,14 @@ namespace SpectraMixtureCombineTool.Model
 {
     public class SpectrumConverter
     {
-        public ISpectrumData GetWeightedSpectra(IEnumerable<SpectraFileViewModel> files)
+        public ISpectrumData GetWeightedSpectra(IEnumerable<SpectraFileViewModel> files, string sampleReference)
         {
-            var spectra = ReadFiles(files);
+            var spectra = ReadFiles(files, sampleReference);
             ValidateSpectra(spectra);
             return AggregateSpectra(spectra);
         }
 
-        private IEnumerable<ISpectrumData> ReadFiles(IEnumerable<SpectraFileViewModel> files)
+        private IEnumerable<ISpectrumData> ReadFiles(IEnumerable<SpectraFileViewModel> files, string sampleReference)
         {
             var reader = new FossSpectraReader();
             foreach (var file in files)
@@ -28,11 +29,13 @@ namespace SpectraMixtureCombineTool.Model
                 {
                     var spectrum = reader.ReadStream(stream).First();
                     spectrum.SpectrumInformation.Add(file.Name, file.Coefficient);
+                    spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
                     var data = new List<float>();
                     for (var i = 0; i < spectrum.Data.Count; i++)
                     {
                         data.Add(spectrum.Data[i] * float.Parse(file.Coefficient));
                     }
+                    //InformationConstants.
                     var weightedSpectrum = new SpectrumData
                     {
                         Data = data,

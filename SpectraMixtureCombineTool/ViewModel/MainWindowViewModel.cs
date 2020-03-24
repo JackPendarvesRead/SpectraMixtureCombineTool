@@ -5,6 +5,7 @@ using SpectraMixtureCombineTool.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -53,7 +54,8 @@ namespace SpectraMixtureCombineTool.ViewModel
                         {
                             var files = Files.ToArray();
                             var converter = new SpectrumConverter();
-                            var weighted = converter.GetWeightedSpectra(files);
+                            var sampleRef = Path.GetFileNameWithoutExtension(sfd.FileName);
+                            var weighted = converter.GetWeightedSpectra(files, sampleRef);
                             var writer = new FileWriter();
                             writer.WriteTxtFile(sfd.FileName, files);
                             writer.WriteFile(sfd.FileName, weighted);
