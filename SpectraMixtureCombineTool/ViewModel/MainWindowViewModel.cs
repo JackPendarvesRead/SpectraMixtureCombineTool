@@ -52,13 +52,8 @@ namespace SpectraMixtureCombineTool.ViewModel
                     {
                         if (sfd.ShowDialog() == DialogResult.OK)
                         {
-                            var files = Files.ToArray();
-                            var converter = new SpectrumConverter();
-                            var sampleRef = Path.GetFileNameWithoutExtension(sfd.FileName);
-                            var weighted = converter.GetWeightedSpectra(files, sampleRef);
-                            var writer = new FileWriter();
-                            writer.WriteTxtFile(sfd.FileName, files);
-                            writer.WriteFile(sfd.FileName, weighted);
+                            var workflow = new Workflow();
+                            workflow.Execute(sfd.FileName, Files.ToArray());
                             MessageBox.Show("Save successful.");
                         }
                     }

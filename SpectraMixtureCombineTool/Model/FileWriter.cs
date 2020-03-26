@@ -10,11 +10,11 @@ namespace SpectraMixtureCombineTool.Model
 {
     public class FileWriter
     {
-        public void WriteFile(string filePath, ISpectrumData data)
+        public void WriteFile(string filePath, IEnumerable<ISpectrumData> data)
         {
             using var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Delete);
             var writer = new JcampSpectraWriter();
-            writer.WriteSpectraToStream(new List<ISpectrumData> { data }, stream);
+            writer.WriteSpectraToStream(data, stream);
         }
 
         public void WriteTxtFile(string filePath, SpectraFileViewModel[] data)
