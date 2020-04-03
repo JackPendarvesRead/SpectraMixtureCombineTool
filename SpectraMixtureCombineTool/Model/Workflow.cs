@@ -14,12 +14,12 @@ namespace SpectraMixtureCombineTool.Model
             var sampleRef = Path.GetFileNameWithoutExtension(filePath);
             var weighted = converter.GetWeightedSpectra(files, sampleRef);
 
-            var sim = new SpectrumVariationSimulation();
-            var varied = sim.Split(weighted);
+            //var sim = new SpectrumVariationSimulation();
+            //var varied = sim.Split(weighted);
 
             var writer = new FileWriter();
             writer.WriteTxtFile(filePath, files);
-            writer.WriteFile(filePath, varied);
+            writer.WriteFile(filePath, weighted);
         }
     }
 }

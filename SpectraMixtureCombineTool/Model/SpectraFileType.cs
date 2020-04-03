@@ -4,7 +4,10 @@ using System.Text;
 
 namespace SpectraMixtureCombineTool.Model
 {
-    class SpectrumReader
+    public enum SpectraFileType
     {
+        Constant,
+        Filler,
+        Ingredient
     }
 }

@@ -11,6 +11,9 @@ namespace SpectraMixtureCombineTool.Model
         public IList<float> Data { get; set; }
         public IList<float> Wavelengths { get; set; }
         public IDictionary<string, string> SpectrumInformation { get; set; }
+        public string Name { get; set; }
+        public float coefficient { get; set; }
+        public SpectraFileType FileType { get; set; }
     }
 
     public static class SpectrumDataExtension

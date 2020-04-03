@@ -14,6 +14,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70" />
@@ -37,6 +38,7 @@
                    x:Name="Coefficient"  
                  MinWidth="200"/>
 
-
+        <ComboBox Grid.Row="3" Grid.Column="1"
+                  x:Name="SpectraFileType" />
     </Grid>
 </rxui:ReactiveUserControl>
