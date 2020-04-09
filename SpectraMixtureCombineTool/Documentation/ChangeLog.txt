@@ -1,3 +1,11 @@
-﻿1.0.0 - initial version
-1.0.1 - Change SampleReference of ISpectrumData to be same as filepath of savefiledialog
-1.1.0 - Added a variation simulation to give spread of results
+﻿1.0.0 
+- initial version
+
+1.0.1 
+- Change SampleReference of ISpectrumData to be same as filepath of savefiledialog
+
+1.1.0 
+- Added a variation simulation to give spread of spectra results
+- Implemented initial calculations for variation simulation
+- Added SpectraFileType (constant, filler, ingredient)
+	
