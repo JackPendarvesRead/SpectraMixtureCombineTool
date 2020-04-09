@@ -27,9 +27,9 @@
                    x:Name="FilePath" />
 
         <Label Grid.Row="1" Grid.Column="0" 
-               x:Name="ConstituentLabel" Content="Constituent:" />
+               x:Name="IngredientLabel" Content="Ingredient:" />
         <TextBox Grid.Row="1" Grid.Column="1"
-                   x:Name="Constituent"  
+                   x:Name="Ingredient"  
                  MinWidth="200"/>
 
         <Label Grid.Row="2" Grid.Column="0" 
