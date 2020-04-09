@@ -45,6 +45,22 @@ namespace SpectraMixtureCombineTool.ViewModel
         {
             try
             {
+                var c1 = Files.Where(x => x.FileType == SpectraFileType.Filler).Count();
+                var c2 = Files.Where(x => x.FileType == SpectraFileType.Ingredient).Count();
+                if (c1 == 0 || c2 == 0)
+                {
+                    var msg = MessageBox.Show(
+                        "There was either no ingredient or no filler selected. Do you want to continue without adding any?", 
+                        "Missing Ingredient Types", 
+                        MessageBoxButtons.OKCancel, 
+                        MessageBoxIcon.Warning);
+                    if(msg != DialogResult.OK)
+                    {
+                        return;
+                    }                
+                }
+
+
                 using (var sfd = new SaveFileDialog())
                 {
                     sfd.Filter = "JCAMP|*.jcm";
