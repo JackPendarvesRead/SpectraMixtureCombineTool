@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Aunir.SpectrumAnalysis2.DotNetStandard" Version="4.0.3" />
-    <PackageReference Include="ReactiveUI" Version="11.2.3" />
-    <PackageReference Include="ReactiveUI.WPF" Version="11.2.3" />
+    <PackageReference Include="ReactiveUI" Version="11.3.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="11.3.1" />
   </ItemGroup>
 
 </Project>

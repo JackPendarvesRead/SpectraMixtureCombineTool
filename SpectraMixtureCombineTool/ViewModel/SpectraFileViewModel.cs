@@ -10,14 +10,14 @@ namespace SpectraMixtureCombineTool.ViewModel
     public class SpectraFileViewModel : ReactiveObject
     {
         public string FilePath { get; set; }
-        public string Name { get; set; }
+        public string Constituent { get; set; }
         public string Coefficient { get; set; }
         public SpectraFileType FileType { get; set; }
 
         public SpectraFileViewModel(string filePath)
         {
             FilePath = filePath;
-            Name = Path.GetFileNameWithoutExtension(filePath);
+            Constituent = Path.GetFileNameWithoutExtension(filePath);
         }
     }
 }

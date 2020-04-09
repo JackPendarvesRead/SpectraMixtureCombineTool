@@ -32,8 +32,8 @@ namespace SpectraMixtureCombineTool.View
                     ).DisposeWith(disposables);
 
                 this.Bind(ViewModel,
-                    vm => vm.Name,
-                    view => view.Name.Text
+                    vm => vm.Constituent,
+                    view => view.Constituent.Text
                     ).DisposeWith(disposables);
 
                 this.Bind(ViewModel,

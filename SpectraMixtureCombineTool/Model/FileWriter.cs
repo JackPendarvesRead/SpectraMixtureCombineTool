@@ -27,12 +27,12 @@ namespace SpectraMixtureCombineTool.Model
                 if (i == 0)
                 {
                     coefficientString.Append(data[i].Coefficient);
-                    constituentString.Append(data[i].Name);
+                    constituentString.Append(data[i].Constituent);
                 }
                 else
                 {
                     coefficientString.Append("," + data[i].Coefficient);
-                    constituentString.Append("," + data[i].Name);
+                    constituentString.Append("," + data[i].Constituent);
                 }
             }
             var exportArray = new string[2] { constituentString.ToString(), coefficientString.ToString() };            
