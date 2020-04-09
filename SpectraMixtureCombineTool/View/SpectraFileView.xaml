@@ -39,6 +39,12 @@
                  MinWidth="200"/>
 
         <ComboBox Grid.Row="3" Grid.Column="1"
-                  x:Name="SpectraFileType" />
+                  x:Name="SpectraFileType">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </rxui:ReactiveUserControl>

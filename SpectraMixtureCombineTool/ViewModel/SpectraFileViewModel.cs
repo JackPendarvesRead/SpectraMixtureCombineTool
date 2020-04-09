@@ -2,7 +2,9 @@
 using SpectraMixtureCombineTool.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Reactive.Linq;
 using System.Text;
 
 namespace SpectraMixtureCombineTool.ViewModel
@@ -13,7 +15,9 @@ namespace SpectraMixtureCombineTool.ViewModel
         public string Constituent { get; set; }
         public string Coefficient { get; set; }
         public SpectraFileType FileType { get; set; }
-
+        //public string SelectedSpectraFileType { get; set; }
+        public Array SpectraFileTypes => Enum.GetValues(typeof(SpectraFileType));
+        
         public SpectraFileViewModel(string filePath)
         {
             FilePath = filePath;
