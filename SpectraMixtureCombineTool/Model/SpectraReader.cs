@@ -12,11 +12,11 @@ namespace SpectraMixtureCombineTool.Model
 {
     public class SpectraReader
     {
-        public IEnumerable<SpectrumData> Read(IEnumerable<SpectraFileViewModel> files, string sampleReference)
+        public List<SpectrumData> Read(IEnumerable<SpectraFileViewModel> files, string sampleReference)
         {
             var aaaa = ReadFiles(files, sampleReference);
             ValidateSpectra(aaaa);
-            return aaaa;
+            return aaaa.ToList();
         }
 
         private IEnumerable<SpectrumData> ReadFiles(IEnumerable<SpectraFileViewModel> files, string sampleReference)

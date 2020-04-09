@@ -13,10 +13,10 @@ namespace SpectraMixtureCombineTool.Model
         {
             var reader = new SpectraReader();
             var sampleRef = Path.GetFileNameWithoutExtension(filePath);
-            var spectra = reader.Read(files, sampleRef).ToList();
+            var spectra = reader.Read(files, sampleRef);
 
             var converter = new SpectrumConverter();
-            var weighted = converter.GetWeightedSpectra(spectra).ToList();
+            var weighted = converter.GetWeightedSpectra(spectra);
 
             var writer = new FileWriter();
             writer.WriteTxtFile(filePath, files);
