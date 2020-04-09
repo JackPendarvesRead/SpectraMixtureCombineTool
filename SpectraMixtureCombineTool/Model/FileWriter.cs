@@ -19,7 +19,6 @@ namespace SpectraMixtureCombineTool.Model
 
         public void WriteTxtFile(string filePath, SpectraFileViewModel[] data)
         {
-            using var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Delete);
             var coefficientString = new StringBuilder();
             var constituentString = new StringBuilder();
             for(var i=0; i < data.Length; i++)
@@ -27,12 +26,12 @@ namespace SpectraMixtureCombineTool.Model
                 if (i == 0)
                 {
                     coefficientString.Append(data[i].Coefficient);
-                    constituentString.Append(data[i].Constituent);
+                    constituentString.Append(data[i].Ingredient);
                 }
                 else
                 {
                     coefficientString.Append("," + data[i].Coefficient);
-                    constituentString.Append("," + data[i].Constituent);
+                    constituentString.Append("," + data[i].Ingredient);
                 }
             }
             var exportArray = new string[2] { constituentString.ToString(), coefficientString.ToString() };            

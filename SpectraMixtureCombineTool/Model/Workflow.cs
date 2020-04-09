@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace SpectraMixtureCombineTool.Model
@@ -10,12 +11,12 @@ namespace SpectraMixtureCombineTool.Model
     {
         public void Execute(string filePath, SpectraFileViewModel[] files)
         {
-            var converter = new SpectrumConverter();
+            var reader = new SpectraReader();
             var sampleRef = Path.GetFileNameWithoutExtension(filePath);
-            var weighted = converter.GetWeightedSpectra(files, sampleRef);
+            var spectra = reader.Read(files, sampleRef).ToList();
 
-            //var sim = new SpectrumVariationSimulation();
-            //var varied = sim.Split(weighted);
+            var converter = new SpectrumConverter();
+            var weighted = converter.GetWeightedSpectra(spectra).ToList();
 
             var writer = new FileWriter();
             writer.WriteTxtFile(filePath, files);
