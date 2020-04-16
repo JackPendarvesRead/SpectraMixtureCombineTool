@@ -40,7 +40,7 @@ namespace SpectraMixtureCombineTool.Model
                         SpectrumInformation = spectrum.SpectrumInformation,
                         Wavelengths = spectrum.Wavelengths
                     };
-                    weightedSpectrum.coefficient = float.Parse(file.Coefficient);
+                    weightedSpectrum.RatioValue = float.Parse(file.Coefficient);
                     weightedSpectrum.Name = file.Ingredient;
                     weightedSpectrum.FileType = file.FileType;
                     yield return weightedSpectrum;

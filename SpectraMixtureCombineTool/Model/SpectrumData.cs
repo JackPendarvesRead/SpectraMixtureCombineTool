@@ -12,7 +12,7 @@ namespace SpectraMixtureCombineTool.Model
         public IList<float> Wavelengths { get; set; }
         public IDictionary<string, string> SpectrumInformation { get; set; }
         public string Name { get; set; }
-        public float coefficient { get; set; }
+        public float RatioValue { get; set; }
         public SpectraFileType FileType { get; set; }
     }
 

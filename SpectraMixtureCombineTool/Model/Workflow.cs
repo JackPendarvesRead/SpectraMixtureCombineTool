@@ -15,12 +15,14 @@ namespace SpectraMixtureCombineTool.Model
             var sampleRef = Path.GetFileNameWithoutExtension(filePath);
             var spectra = reader.Read(files, sampleRef);
 
+            var mixture = new Mixture(spectra);
+
             var converter = new SpectrumConverter();
-            var weighted = converter.GetWeightedSpectra(spectra);
+            var weighted = converter.GetWeightedSpectra(mixture);
 
             var writer = new FileWriter();
-            writer.WriteTxtFile(filePath, files);
-            writer.WriteFile(filePath, weighted);
+            writer.WriteTextFile(filePath, weighted.ToList(), files);
+            writer.WriteJcampFile(filePath, weighted);
         }
     }
 }

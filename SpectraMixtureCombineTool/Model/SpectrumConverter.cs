@@ -13,58 +13,62 @@ namespace SpectraMixtureCombineTool.Model
 {
     public class SpectrumConverter
     {
-        public IEnumerable<ISpectrumData> GetWeightedSpectra(IEnumerable<SpectrumData> spectra, int percentageChange = 10)
+        public IEnumerable<WeightedSpectrum> GetWeightedSpectra(Mixture mixture, int percentageChange = 10)
         {
             for (var i = -percentageChange; i <= percentageChange; i++)
             {
-                yield return AggregateSpectra(spectra, percentageChange);
+                float percentageCoefficient = (float)i / 100f;
+                yield return AggregateSpectra(mixture, percentageCoefficient);
             }            
-        }        
+        }
 
-        private ISpectrumData AggregateSpectra(IEnumerable<SpectrumData> spectra, int percentageChange)
-        {
-            var data = GetWeightedData(spectra, percentageChange).ToList();
+        private WeightedSpectrum AggregateSpectra(Mixture mixture, float percentageCoefficient)
+        {            
+            var data = GetWeightedData(mixture, percentageCoefficient).ToList();
+            var wavelengths = mixture.Spectra.Select(x => x.Wavelengths).First();
+            var dic = mixture.Spectra.Select(x => x.SpectrumInformation).Merge();
+            dic[InformationConstants.SampleReference] = dic[InformationConstants.SampleReference] + percentageCoefficient.ToString();
 
-            var wavelengths = spectra.Select(x => x.Wavelengths).First();
-
-            var dic = spectra.Select(x => x.SpectrumInformation).Merge();
-            dic[InformationConstants.SampleReference] = dic[InformationConstants.SampleReference] + percentageChange.ToString();
-
-            return new SpectrumData
+            return new WeightedSpectrum
             {
                 Data = data,
                 Wavelengths = wavelengths,
-                SpectrumInformation = dic
+                SpectrumInformation = dic,
+                PercentChange = percentageCoefficient
             };
         }
 
-        private IEnumerable<float> GetWeightedData(IEnumerable<SpectrumData> spectra, int percentageChange)
+        private IEnumerable<float> GetWeightedData(Mixture mixture, float percentageCoefficient)
         {
-            var aggregated = spectra.Aggregate(new SpectrumData(), (acc, next) => 
+            float coefficientSum = 0f;
+            float[] weightedSpectra = new float[mixture.Spectra.First().Data.Count];
+
+            for(var j = 0; j < weightedSpectra.Length; j++)
             {
-                float coefficient;
-                switch (next.FileType)
+                for (var i = 0; i < mixture.Spectra.Count; i++)
                 {
-                    case SpectraFileType.Constant:
-                        coefficient = 1;
-                        break;
-
-                    case SpectraFileType.Filler:
-                        coefficient = 1 - percentageChange / spectra.Where(x => x.FileType == SpectraFileType.Filler).Count();
-                        break;
-
-                    case SpectraFileType.Ingredient:   
-                        coefficient = 1 + percentageChange / spectra.Where(x => x.FileType == SpectraFileType.Ingredient).Count();
-                        break;
-
-                    default:
-                        throw new Exception("Could not recognise SpectraFileType in GetWeightedData method");
+                    float abs = mixture.Spectra[i].Data[j];
+                    float weightedCoefficient = GetWeightedCoefficient(mixture.Spectra[i], mixture.FillerCount, mixture.IngredientCount, percentageCoefficient);
+                    coefficientSum += weightedCoefficient;
+                    float value = abs * weightedCoefficient;
+                    weightedSpectra[j] += value;
                 }
+                weightedSpectra[j] /= coefficientSum;
+                coefficientSum = 0f;
+            }
+            return weightedSpectra;
+        }
 
-                acc.Data = acc.Data != null ? acc.Data.Zip(next.Data, (acc, next) => acc + next * coefficient).ToList() : next.Data;
-                return acc;
-            });
-            return aggregated.Data;
+        private float GetWeightedCoefficient(SpectrumData spectrumData, int fillerCount, int ingredientCount, float percentageCoefficient)
+        {
+            float adjustedPercentageCoefficient = spectrumData.FileType switch
+            {
+                SpectraFileType.Constant => 1,
+                SpectraFileType.Filler => 1 - percentageCoefficient / fillerCount,
+                SpectraFileType.Ingredient => 1 + percentageCoefficient / ingredientCount,
+                _ => throw new Exception("Could not recognise SpectraFileType in GetWeightedData method")
+            };
+            return spectrumData.RatioValue * adjustedPercentageCoefficient;
         }
     }
 }

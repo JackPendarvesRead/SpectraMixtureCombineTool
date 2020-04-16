@@ -64,19 +64,25 @@ namespace SpectraMixtureCombineTool.ViewModel
                 using (var sfd = new SaveFileDialog())
                 {
                     sfd.Filter = "JCAMP|*.jcm";
-                    if (ValidateCoefficients())
+                    if (sfd.ShowDialog() == DialogResult.OK)
                     {
-                        if (sfd.ShowDialog() == DialogResult.OK)
-                        {
-                            var workflow = new Workflow();
-                            workflow.Execute(sfd.FileName, Files.ToArray());
-                            MessageBox.Show("Save successful.");
-                        }
+                        var workflow = new Workflow();
+                        workflow.Execute(sfd.FileName, Files.ToArray());
+                        MessageBox.Show("Save successful.");
                     }
-                    else
-                    {
-                        MessageBox.Show("Sum of coefficients must be equal to 1.0");
-                    }
+                    //if (ValidateCoefficients())
+                    //{
+                    //    if (sfd.ShowDialog() == DialogResult.OK)
+                    //    {
+                    //        var workflow = new Workflow();
+                    //        workflow.Execute(sfd.FileName, Files.ToArray());
+                    //        MessageBox.Show("Save successful.");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("Sum of coefficients must be equal to 1.0");
+                    //}
 
                 }
             }
@@ -98,21 +104,21 @@ namespace SpectraMixtureCombineTool.ViewModel
             }
         }
 
-        private bool ValidateCoefficients()
-        {
-            float sum = 0.0f;
-            foreach(var f in Files)
-            {
-                sum += float.Parse(f.Coefficient);
-            }
-            if(sum == 1.0f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //private bool ValidateCoefficients()
+        //{
+        //    float sum = 0.0f;
+        //    foreach(var f in Files)
+        //    {
+        //        sum += float.Parse(f.Coefficient);
+        //    }
+        //    if(sum == 1.0f)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }
