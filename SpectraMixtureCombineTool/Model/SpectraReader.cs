@@ -1,6 +1,7 @@
 ﻿using Aunir.SpectrumAnalysis2.FossConnector;
 using Aunir.SpectrumAnalysis2.Interfaces;
 using Aunir.SpectrumAnalysis2.Interfaces.Constants;
+using Aunir.SpectrumAnalysis2.JcampConnector;
 using SpectraMixtureCombineTool.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SpectraMixtureCombineTool.Model
                 using (var stream = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Delete))
                 {                    
                     ISpectrumData spectrum = reader.ReadStream(stream).First();
-                    spectrum.SpectrumInformation.Add("Ingredient:" + file.Ingredient, file.Coefficient);
+                    spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient);
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
                     var spectrumData = new SpectrumData
                     {
