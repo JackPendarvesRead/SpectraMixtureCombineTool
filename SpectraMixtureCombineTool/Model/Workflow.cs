@@ -21,7 +21,6 @@ namespace SpectraMixtureCombineTool.Model
             var weighted = converter.GetWeightedSpectra(mixture);
 
             var writer = new FileWriter();
-            writer.WriteTextFile(filePath, weighted.ToList(), files);
             writer.WriteJcampFile(filePath, weighted);
         }
     }

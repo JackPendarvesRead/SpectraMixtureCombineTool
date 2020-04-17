@@ -7,5 +7,7 @@
 1.1.0 
 - Added a variation simulation to give spread of spectra results
 - Implemented initial calculations for variation simulation
-- Added SpectraFileType (constant, filler, ingredient)
+- Added SpectraFileType (constant, filler, ingredient) selection in view
+- Added inclusions of ignredients to the output of Jcamp (spectrum analysis update)
+- Removed text file writer which is no longer needed
 	
