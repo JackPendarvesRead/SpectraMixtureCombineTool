@@ -50,6 +50,8 @@ namespace SpectraMixtureCombineTool.View
                    vm => vm.FileType,
                    view => view.SpectraFileType.SelectedItem
                    ).DisposeWith(disposables);
+
+                SpectraFileType.SelectedItem = SpectraMixtureCombineTool.Model.SpectraFileType.Ingredient;
             });
         }
     }
