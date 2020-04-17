@@ -25,25 +25,20 @@ namespace SpectraMixtureCombineTool.Model
             foreach (var file in files)
             {
                 using (var stream = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Delete))
-                {
+                {                    
                     ISpectrumData spectrum = reader.ReadStream(stream).First();
-                    spectrum.SpectrumInformation.Add(file.Ingredient, file.Coefficient);
+                    spectrum.SpectrumInformation.Add("Ingredient:" + file.Ingredient, file.Coefficient);
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
-                    var data = new List<float>();
-                    for (var i = 0; i < spectrum.Data.Count; i++)
+                    var spectrumData = new SpectrumData
                     {
-                        data.Add(spectrum.Data[i] * float.Parse(file.Coefficient));
-                    }
-                    var weightedSpectrum = new SpectrumData
-                    {
-                        Data = data,
+                        Data = spectrum.Data,
                         SpectrumInformation = spectrum.SpectrumInformation,
-                        Wavelengths = spectrum.Wavelengths
+                        Wavelengths = spectrum.Wavelengths,
+                        RatioValue = float.Parse(file.Coefficient),
+                        Name = file.Ingredient,
+                        FileType = file.FileType
                     };
-                    weightedSpectrum.RatioValue = float.Parse(file.Coefficient);
-                    weightedSpectrum.Name = file.Ingredient;
-                    weightedSpectrum.FileType = file.FileType;
-                    yield return weightedSpectrum;
+                    yield return spectrumData;
                 }
             }
         }

@@ -27,7 +27,7 @@ namespace SpectraMixtureCombineTool.Model
             var data = GetWeightedData(mixture, percentageCoefficient).ToList();
             var wavelengths = mixture.Spectra.Select(x => x.Wavelengths).First();
             var dic = mixture.Spectra.Select(x => x.SpectrumInformation).Merge();
-            dic[InformationConstants.SampleReference] = dic[InformationConstants.SampleReference] + percentageCoefficient.ToString();
+            dic[InformationConstants.SampleReference] = percentageCoefficient.ToString() + dic[InformationConstants.SampleReference];
 
             return new WeightedSpectrum
             {
