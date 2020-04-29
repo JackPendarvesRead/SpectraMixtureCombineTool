@@ -11,7 +11,7 @@ namespace SpectraMixtureCombineTool.Logic.Writer
 {
     public class JcampFileWriter
     {
-        public void WriteJcampFile(string filePath, IEnumerable<WeightedSpectrum> data)
+        public void WriteJcampFile(string filePath, IEnumerable<SpectrumData> data)
         {
             using var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Delete);
             var writer = new JcampSpectraWriter();

@@ -14,16 +14,16 @@ namespace SpectraMixtureCombineTool.Logic.Converter
 {
     public class SpectrumConverter
     {
-        public IEnumerable<WeightedSpectrum> GetWeightedSpectra(Mixture mixture, int percentageChange = 10)
+        public IEnumerable<SpectrumData> GetWeightedSpectra(Mixture mixture, int percentageChange = 10)
         {
             for (var i = -percentageChange; i <= percentageChange; i++)
             {
                 float percentageCoefficient = (float)i / 100f;
-                yield return AggregateSpectra(mixture, percentageCoefficient);
+                yield return CalculateWeightedSpectrum(mixture, percentageCoefficient);
             }            
         }
 
-        private WeightedSpectrum AggregateSpectra(Mixture mixture, float percentageCoefficient)
+        private SpectrumData CalculateWeightedSpectrum(Mixture mixture, float percentageCoefficient)
         {      
             var dic = mixture.Spectra.Select(x => x.SpectrumInformation).Merge();
 
@@ -53,35 +53,8 @@ namespace SpectraMixtureCombineTool.Logic.Converter
             var wavelengths = mixture.Spectra.Select(x => x.Wavelengths).First();
             dic[InformationConstants.SampleReference] = percentageCoefficient.ToString() + dic[InformationConstants.SampleReference];
 
-            return new WeightedSpectrum
-            {
-                Data = weightedSpectra,
-                Wavelengths = wavelengths,
-                SpectrumInformation = dic,
-                PercentChange = percentageCoefficient
-            };
+            return new SpectrumData(wavelengths, weightedSpectra, dic);
         }
-
-        //private IEnumerable<float> GetWeightedData(Mixture mixture, float percentageCoefficient)
-        //{
-        //    float coefficientSum = 0f;
-        //    float[] weightedSpectra = new float[mixture.Spectra.First().Data.Count];
-
-        //    for(var j = 0; j < weightedSpectra.Length; j++)
-        //    {
-        //        for (var i = 0; i < mixture.Spectra.Count; i++)
-        //        {
-        //            float abs = mixture.Spectra[i].Data[j];
-        //            float weightedCoefficient = GetWeightedCoefficient(mixture.Spectra[i], mixture.FillerCount, mixture.IngredientCount, percentageCoefficient);
-        //            coefficientSum += weightedCoefficient;
-        //            float value = abs * weightedCoefficient;
-        //            weightedSpectra[j] += value;
-        //        }
-        //        weightedSpectra[j] /= coefficientSum;
-        //        coefficientSum = 0f;
-        //    }
-        //    return weightedSpectra;
-        //}
 
         private float GetWeightedCoefficient(SpectrumData spectrumData, int fillerCount, int ingredientCount, float percentageCoefficient)
         {
