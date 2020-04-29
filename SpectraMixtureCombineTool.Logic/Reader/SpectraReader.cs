@@ -30,12 +30,10 @@ namespace SpectraMixtureCombineTool.Logic.Reader
                     ISpectrumData spectrum = reader.ReadStream(stream).First();
                     spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient.ToString());
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
-                    var spectrumData = new SpectrumData
+
+                    var spectrumData = new SpectrumData(spectrum.Wavelengths, spectrum.Data, spectrum.SpectrumInformation)
                     {
-                        Data = spectrum.Data,
-                        SpectrumInformation = spectrum.SpectrumInformation,
-                        Wavelengths = spectrum.Wavelengths,
-                        RatioValue = file.Coefficient,
+                        Inclusion = file.Coefficient,
                         Name = file.Ingredient,
                         FileType = file.FileType
                     };

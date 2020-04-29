@@ -2,6 +2,7 @@
 using Aunir.SpectrumAnalysis2.Interfaces;
 using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.JcampConnector;
+using SpectraMixtureCombineTool.Logic.Extension;
 using SpectraMixtureCombineTool.Logic.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -91,7 +92,7 @@ namespace SpectraMixtureCombineTool.Logic.Converter
                 SpectraFileType.Ingredient => 1 + percentageCoefficient / ingredientCount,
                 _ => throw new Exception("Could not recognise SpectraFileType in GetWeightedData method")
             };
-            return spectrumData.RatioValue * adjustedPercentageCoefficient;
+            return spectrumData.Inclusion * adjustedPercentageCoefficient;
         }
     }
 }
