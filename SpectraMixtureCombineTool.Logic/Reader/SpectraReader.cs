@@ -2,25 +2,25 @@
 using Aunir.SpectrumAnalysis2.Interfaces;
 using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.JcampConnector;
-using SpectraMixtureCombineTool.ViewModel;
+using SpectraMixtureCombineTool.Logic.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SpectraMixtureCombineTool.Model
+namespace SpectraMixtureCombineTool.Logic.Reader
 {
     public class SpectraReader
     {
-        public List<SpectrumData> Read(IEnumerable<SpectraFileViewModel> files, string sampleReference)
+        public List<SpectrumData> Read(IEnumerable<SpectraFile> files, string sampleReference)
         {
             var aaaa = ReadFiles(files, sampleReference);
             ValidateSpectra(aaaa);
             return aaaa.ToList();
         }
 
-        private IEnumerable<SpectrumData> ReadFiles(IEnumerable<SpectraFileViewModel> files, string sampleReference)
+        private IEnumerable<SpectrumData> ReadFiles(IEnumerable<SpectraFile> files, string sampleReference)
         {
             var reader = new FossSpectraReader();
             foreach (var file in files)
@@ -28,14 +28,14 @@ namespace SpectraMixtureCombineTool.Model
                 using (var stream = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Delete))
                 {                    
                     ISpectrumData spectrum = reader.ReadStream(stream).First();
-                    spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient);
+                    spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient.ToString());
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
                     var spectrumData = new SpectrumData
                     {
                         Data = spectrum.Data,
                         SpectrumInformation = spectrum.SpectrumInformation,
                         Wavelengths = spectrum.Wavelengths,
-                        RatioValue = float.Parse(file.Coefficient),
+                        RatioValue = file.Coefficient,
                         Name = file.Ingredient,
                         FileType = file.FileType
                     };

@@ -11,9 +11,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aunir.SpectrumAnalysis2.DotNetStandard" Version="5.0.3" />
-    <PackageReference Include="ReactiveUI" Version="11.3.1" />
+    <PackageReference Include="ReactiveUI" Version="11.3.8" />
     <PackageReference Include="ReactiveUI.WPF" Version="11.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SpectraMixtureCombineTool.Logic\SpectraMixtureCombineTool.Logic.csproj" />
   </ItemGroup>
 
 </Project>

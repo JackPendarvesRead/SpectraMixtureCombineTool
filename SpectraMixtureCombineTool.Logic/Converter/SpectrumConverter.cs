@@ -2,14 +2,14 @@
 using Aunir.SpectrumAnalysis2.Interfaces;
 using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.JcampConnector;
-using SpectraMixtureCombineTool.ViewModel;
+using SpectraMixtureCombineTool.Logic.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SpectraMixtureCombineTool.Model
+namespace SpectraMixtureCombineTool.Logic.Converter
 {
     public class SpectrumConverter
     {

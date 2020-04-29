@@ -3,19 +3,16 @@ using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.Interfaces.Pretreatments;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace SpectraMixtureCombineTool.Model
+namespace SpectraMixtureCombineTool.Logic.Infrastructure
 {
-    public class SpectrumData : ISpectrumData
+    public class WeightedSpectrum : ISpectrumData
     {
         public IList<float> Data { get; set; }
         public IList<float> Wavelengths { get; set; }
         public IDictionary<string, string> SpectrumInformation { get; set; }
-        public string Name { get; set; }
-        public float RatioValue { get; set; }
-        public SpectraFileType FileType { get; set; }
+        public float PercentChange { get; set; }
 
         public string SpectrumReference => throw new NotImplementedException();
 
@@ -33,21 +30,5 @@ namespace SpectraMixtureCombineTool.Model
         {
             throw new NotImplementedException();
         }
-    }
-
-    public static class SpectrumDataExtension
-    {
-        public static IDictionary<string, string> Merge(this IEnumerable<IDictionary<string, string>> dics)
-        {
-            var map = new Dictionary<string, string>();
-            foreach(var dic in dics)
-            {
-                foreach(var pair in dic)
-                {
-                    map[pair.Key] = pair.Value;
-                }
-            }
-            return map;
-        }        
     }
 }

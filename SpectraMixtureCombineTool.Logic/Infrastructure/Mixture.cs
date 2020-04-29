@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpectraMixtureCombineTool.Model
+namespace SpectraMixtureCombineTool.Logic.Infrastructure
 {
     public class Mixture
     {

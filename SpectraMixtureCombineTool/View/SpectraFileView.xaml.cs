@@ -51,7 +51,7 @@ namespace SpectraMixtureCombineTool.View
                    view => view.SpectraFileType.SelectedItem
                    ).DisposeWith(disposables);
 
-                SpectraFileType.SelectedItem = SpectraMixtureCombineTool.Model.SpectraFileType.Ingredient;
+                SpectraFileType.SelectedItem = SpectraMixtureCombineTool.Logic.Infrastructure.SpectraFileType.Ingredient;
             });
         }
     }

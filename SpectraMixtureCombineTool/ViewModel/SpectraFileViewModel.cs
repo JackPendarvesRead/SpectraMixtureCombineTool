@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using SpectraMixtureCombineTool.Model;
+using SpectraMixtureCombineTool.Logic.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +15,6 @@ namespace SpectraMixtureCombineTool.ViewModel
         public string Ingredient { get; set; }
         public string Coefficient { get; set; }
         public SpectraFileType FileType { get; set; }
-        //public string SelectedSpectraFileType { get; set; }
         public Array SpectraFileTypes => Enum.GetValues(typeof(SpectraFileType));
         
         public SpectraFileViewModel(string filePath)

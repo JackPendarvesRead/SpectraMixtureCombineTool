@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SpectraMixtureCombineTool.Model
+namespace SpectraMixtureCombineTool.Logic.Infrastructure
 {
     public enum SpectraFileType
     {

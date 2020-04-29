@@ -1,6 +1,7 @@
 ﻿using DynamicData;
 using ReactiveUI;
-using SpectraMixtureCombineTool.Model;
+using SpectraMixtureCombineTool.Logic.Infrastructure;
+using SpectraMixtureCombineTool.Logic.Workflow;
 using SpectraMixtureCombineTool.Service;
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,7 @@ namespace SpectraMixtureCombineTool.ViewModel
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
                         var workflow = new Workflow();
-                        workflow.Execute(sfd.FileName, Files.ToArray());
+                        workflow.Execute(sfd.FileName, GetSpectraFiles());
                         MessageBox.Show("Save successful.");
                     }
 
@@ -76,6 +77,20 @@ namespace SpectraMixtureCombineTool.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private IEnumerable<SpectraFile> GetSpectraFiles()
+        {
+            foreach(var file in Files)
+            {
+                yield return new SpectraFile
+                {
+                    FilePath = file.FilePath,
+                    FileType = file.FileType,
+                    Coefficient = float.Parse(file.Coefficient),
+                    Ingredient = file.Ingredient
+                };
             }
         }
 
