@@ -10,7 +10,7 @@ using System.Text;
 
 namespace SpectraMixtureCombineTool.Logic.Workflow
 {
-    public class Workflow
+    public sealed class Workflow
     {
         public void Execute(string filePath, IEnumerable<SpectraFile> files)
         {
@@ -24,7 +24,7 @@ namespace SpectraMixtureCombineTool.Logic.Workflow
             var weighted = converter.GetWeightedSpectra(mixture);
 
             var writer = new JcampFileWriter();
-            writer.WriteJcampFile(filePath, weighted);
+            writer.Write(filePath, weighted);
         }
     }
 }

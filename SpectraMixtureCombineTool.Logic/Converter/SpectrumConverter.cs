@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SpectraMixtureCombineTool.Logic.Converter
 {
-    public class SpectrumConverter
+    internal sealed class SpectrumConverter
     {
         public IEnumerable<SpectrumData> GetWeightedSpectra(Mixture mixture, int percentageChange = 10)
         {

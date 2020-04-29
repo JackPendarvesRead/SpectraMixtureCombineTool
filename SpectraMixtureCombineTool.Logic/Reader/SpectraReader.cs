@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SpectraMixtureCombineTool.Logic.Reader
 {
-    public class SpectraReader
+    internal sealed class SpectraReader
     {
         public List<SpectrumData> Read(IEnumerable<SpectraFile> files, string sampleReference)
         {

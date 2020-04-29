@@ -9,9 +9,9 @@ using System.Text;
 
 namespace SpectraMixtureCombineTool.Logic.Writer
 {
-    public class JcampFileWriter
+    internal sealed class JcampFileWriter : IWriter<SpectrumData>
     {
-        public void WriteJcampFile(string filePath, IEnumerable<SpectrumData> data)
+        public void Write(string filePath, IEnumerable<SpectrumData> data)
         {
             using var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Delete);
             var writer = new JcampSpectraWriter();
