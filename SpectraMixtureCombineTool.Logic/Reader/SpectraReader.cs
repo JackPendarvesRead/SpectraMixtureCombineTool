@@ -15,9 +15,9 @@ namespace SpectraMixtureCombineTool.Logic.Reader
     {
         public List<SpectrumData> Read(IEnumerable<SpectraFile> files, string sampleReference)
         {
-            var aaaa = ReadFiles(files, sampleReference);
-            ValidateSpectra(aaaa);
-            return aaaa.ToList();
+            var spectraFiles = ReadFiles(files, sampleReference);
+            ValidateSpectra(spectraFiles);
+            return spectraFiles.ToList();
         }
 
         private IEnumerable<SpectrumData> ReadFiles(IEnumerable<SpectraFile> files, string sampleReference)
