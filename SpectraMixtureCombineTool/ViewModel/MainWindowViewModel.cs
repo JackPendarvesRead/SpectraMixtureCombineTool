@@ -46,9 +46,9 @@ namespace SpectraMixtureCombineTool.ViewModel
         {
             try
             {
-                var c1 = Files.Where(x => x.FileType == SpectraFileType.Filler).Count();
-                var c2 = Files.Where(x => x.FileType == SpectraFileType.Ingredient).Count();
-                if (c1 == 0 || c2 == 0)
+                var fillerCount = Files.Where(x => x.FileType == SpectraFileType.Filler).Count();
+                var ingredientCount = Files.Where(x => x.FileType == SpectraFileType.Ingredient).Count();
+                if (fillerCount == 0 || ingredientCount == 0)
                 {
                     var msg = MessageBox.Show(
                         "There was either no ingredient or no filler selected. Do you want to continue without adding any?", 
@@ -61,7 +61,6 @@ namespace SpectraMixtureCombineTool.ViewModel
                     }                
                 }
 
-
                 using (var sfd = new SaveFileDialog())
                 {
                     sfd.Filter = "JCAMP|*.jcm";
@@ -71,7 +70,6 @@ namespace SpectraMixtureCombineTool.ViewModel
                         workflow.Execute(sfd.FileName, GetSpectraFiles());
                         MessageBox.Show("Save successful.");
                     }
-
                 }
             }
             catch (Exception ex)

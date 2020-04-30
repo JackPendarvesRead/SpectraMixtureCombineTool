@@ -39,6 +39,7 @@
                  MinWidth="200"/>
 
         <ComboBox Grid.Row="3" Grid.Column="1"
+                  Width="200"
                   x:Name="SpectraFileType">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
