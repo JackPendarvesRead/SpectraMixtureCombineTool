@@ -13,26 +13,29 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel>
+        <StackPanel Margin="5,5,5,5">
             <Label Content="Custom Feedback Message" FontWeight="Bold" />
             <CheckBox 
-                x:Name="ShowCustomMessageCheckBox"
+                x:Name="GenerateVariationCheckBox"
                 VerticalContentAlignment="Center"                
                 HorizontalContentAlignment="Left">
-                <TextBlock Text="show custom feedback message for out of range CoV results" TextWrapping="Wrap" />
+                <TextBlock Text="Generate simulated variation in spectra" TextWrapping="Wrap" />
             </CheckBox>
-            <StackPanel x:Name="CustomMessageSettingsPanel">
-                <TextBox x:Name="CustomMessageTextBox" 
-                 MinHeight="100" 
-                 TextWrapping="Wrap"
-                 Margin="10,10,10,10"
-                 Text="This is the default text - this is the default message which will appear if CoV is out of set limits" />
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                    <TextBlock Text="Min" />
-                    <TextBox x:Name="MinimumCoV" Width="50" />
-                    <TextBlock Text="Max" />
-                    <TextBox x:Name="MaximumCoV" Width="50" />
+            <StackPanel x:Name="GenerateVariationSettingsPanel">
+                
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="Number generated" />
+                    <ComboBox x:Name="NumberGeneratedComboBox" Width="80"  />
+                    <!--<TextBox x:Name="NumberGenerated" Width="50" />-->
+                    
                 </StackPanel>
+                <TextBlock Text="This number will be generate this number of spectra each side of the original (e.g. if number=5 it will generate five spectra above and five below)" 
+                           TextWrapping="Wrap"
+                           FontSize="12"
+                           FontWeight="Light"
+                           FontStyle="Italic"
+                           Foreground="OrangeRed"
+                           Margin="0,0,0,10" />
             </StackPanel>
 
 

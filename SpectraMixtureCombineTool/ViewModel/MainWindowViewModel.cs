@@ -3,6 +3,7 @@ using ReactiveUI;
 using SpectraMixtureCombineTool.Logic.Infrastructure;
 using SpectraMixtureCombineTool.Logic.Workflow;
 using SpectraMixtureCombineTool.Service;
+using SpectraMixtureCombineTool.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,7 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
         public ReactiveCommand<Unit, Unit> AddSpectraFileCommand { get; set; }
         public ReactiveCommand<Unit, Unit> SaveCommand { get; set; }
         public ReactiveCommand<Unit, Unit> ClearCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> SettingsCommand { get; set; }
 
         private readonly SpectraFileCache cache = new SpectraFileCache();
         private readonly ReadOnlyObservableCollection<SpectraFileViewModel> _files;
@@ -35,6 +37,13 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
             AddSpectraFileCommand = ReactiveCommand.Create(AddSpectraFileImpl);
             SaveCommand = ReactiveCommand.Create(SaveImpl);
             ClearCommand = ReactiveCommand.Create(ClearImpl);
+            SettingsCommand = ReactiveCommand.Create(SettingCmdImpl);
+        }
+
+        private void SettingCmdImpl()
+        {
+            var window = new SettingsWindow();
+            window.ShowDialog();
         }
 
         private void ClearImpl()

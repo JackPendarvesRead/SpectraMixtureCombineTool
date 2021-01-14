@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace SpectraMixtureCombineTool
+namespace SpectraMixtureCombineTool.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -35,6 +35,9 @@ namespace SpectraMixtureCombineTool
             Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
             Locator.CurrentMutable.Register(() => new SpectraFileView(), typeof(IViewFor<SpectraFileViewModel>));
             Locator.CurrentMutable.Register(() => new SettingsViewModel(), typeof(IViewFor<SettingsWindow>));
+
+            var settingsManager = new SettingsManager<UserSettings>("AlchemyUserSettings.json", "Alchemy");
+            Locator.CurrentMutable.RegisterConstant<SettingsManager<UserSettings>>(settingsManager);
 
             var window = new MainWindow();
             window.Show();
