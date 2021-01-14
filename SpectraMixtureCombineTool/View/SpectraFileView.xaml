@@ -17,7 +17,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -40,7 +40,8 @@
 
         <ComboBox Grid.Row="3" Grid.Column="1"
                   Width="200"
-                  x:Name="SpectraFileType">
+                  x:Name="SpectraFileType"
+                  HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" />
