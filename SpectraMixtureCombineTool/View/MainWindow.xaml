@@ -12,6 +12,24 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Button x:Name="AddButton" Content="Add" />
+                <Button x:Name="ClearButton" Content="Clear" />
+                <Button x:Name="SaveButton" Content="Save" />
+            </StackPanel>
+            <Image Grid.Column="1" Height="80" HorizontalAlignment="Right" Margin="5,5,5,5">
+                <Image.Source>
+                    <BitmapImage DecodePixelHeight="80" UriSource="/Images/ABVistaLogo.png" />
+                </Image.Source>
+            </Image>
+        </Grid>
+
         <ListBox
             Grid.Row="1"
             x:Name="SpectraFilesListBox"
@@ -19,11 +37,5 @@
             Width="auto"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             HorizontalContentAlignment="Stretch"/>
-        <StackPanel Grid.Column="0"
-                    Orientation="Horizontal">
-            <Button x:Name="AddButton" Content="Add" />
-            <Button x:Name="ClearButton" Content="Clear" />
-            <Button x:Name="SaveButton" Content="Save" />
-        </StackPanel>
     </Grid>
 </rxui:ReactiveWindow>
