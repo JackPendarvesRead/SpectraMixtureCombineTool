@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using Serilog;
 using SpectraMixtureCombineTool.View;
 using SpectraMixtureCombineTool.ViewModel;
 using Splat;
@@ -24,9 +25,18 @@ namespace SpectraMixtureCombineTool
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File(@"Logs\AlchemyApplicationLogs.log")
+                .CreateLogger();
+
             Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
             Locator.CurrentMutable.Register(() => new SpectraFileView(), typeof(IViewFor<SpectraFileViewModel>));
-            base.OnStartup(e);
+
+            var window = new MainWindow();
+            window.Show();
         }
     }
 }

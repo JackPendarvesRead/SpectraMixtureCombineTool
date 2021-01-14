@@ -1,8 +1,7 @@
 ﻿<Application x:Class="SpectraMixtureCombineTool.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SpectraMixtureCombineTool"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:SpectraMixtureCombineTool">
     <Application.Resources>
         <!--Control colors.-->
         <Color x:Key="VistaLightBlue">#A2DCE7</Color>

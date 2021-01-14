@@ -1,6 +1,6 @@
 ﻿<rxui:ReactiveWindow
     xmlns:rxui="http://reactiveui.net" 
-    x:Class="SpectraMixtureCombineTool.MainWindow"
+    x:Class="SpectraMixtureCombineTool.View.MainWindow"
     x:TypeArguments="vm:MainWindowViewModel"
     xmlns:vm="clr-namespace:SpectraMixtureCombineTool.ViewModel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
