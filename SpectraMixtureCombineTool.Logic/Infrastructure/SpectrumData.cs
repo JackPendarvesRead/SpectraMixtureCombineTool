@@ -8,10 +8,10 @@ using System.Text;
 
 namespace SpectraMixtureCombineTool.Logic.Infrastructure
 {
-    public class SpectrumData : Aunir.SpectrumAnalysis2.Core.Default.SpectrumData
+    public class AlchemySpectrumData : Aunir.SpectrumAnalysis2.Core.Default.SpectrumData
     {
 
-        public SpectrumData(IList<float> wavelengths, IList<float> data, IDictionary<string, string> spectrumInformation)
+        public AlchemySpectrumData(IList<float> wavelengths, IList<float> data, IDictionary<string, string> spectrumInformation)
             : base(wavelengths,
                   data, 
                   spectrumInformation, 
@@ -23,7 +23,7 @@ namespace SpectraMixtureCombineTool.Logic.Infrastructure
         {
         }
 
-        public SpectrumData(IList<float> wavelengths, IList<float> data, IDictionary<string,string> spectrumInformation, string spectrumReference, string instrumentType, string instrumentId, XUnits xUnits, YUnits yUnits) 
+        public AlchemySpectrumData(IList<float> wavelengths, IList<float> data, IDictionary<string,string> spectrumInformation, string spectrumReference, string instrumentType, string instrumentId, XUnits xUnits, YUnits yUnits) 
             : base(wavelengths, data, spectrumInformation, spectrumReference, instrumentType, instrumentId, xUnits, yUnits)
         {
         }

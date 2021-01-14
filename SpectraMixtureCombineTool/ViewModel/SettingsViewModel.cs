@@ -24,11 +24,18 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
             set => this.RaiseAndSetIfChanged(ref generateVariation, value);
         }
 
-        private int variationNumber;
-        public int VariationNumber
+        private int numberOfIterations;
+        public int NumberOfIterations
         {
-            get => variationNumber;
-            set => this.RaiseAndSetIfChanged(ref variationNumber, value);
+            get => numberOfIterations;
+            set => this.RaiseAndSetIfChanged(ref numberOfIterations, value);
+        }
+
+        private float percentageChange;
+        public float PercentageChange
+        {
+            get => percentageChange;
+            set => this.RaiseAndSetIfChanged(ref percentageChange, value);
         }
 
         public ValidationContext ValidationContext { get; } = new ValidationContext(ImmediateScheduler.Instance);
@@ -41,7 +48,8 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
             settingsManager = Locator.Current.GetService<SettingsManager<UserSettings>>();
             settings = settingsManager.LoadSettings();
 
-            VariationNumber = settings.VariationNumber;
+            NumberOfIterations = settings.NumberOfIterations;
+            PercentageChange = settings.PercentageChange;
             GenerateVariation = settings.GenerateVariation;
 
             //Commands
@@ -50,7 +58,8 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
                 try
                 {
                     settings.GenerateVariation = GenerateVariation;
-                    settings.VariationNumber = VariationNumber;
+                    settings.PercentageChange = PercentageChange;
+                    settings.NumberOfIterations = NumberOfIterations;
                     settingsManager.SaveSettings(settings);
                 }
                 catch (Exception ex)
@@ -76,7 +85,12 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
                 MessageBox.Show(ex.Message);
             });
 
-            var validGeneration = this.WhenAnyValue(vm => vm.GenerateVariation, vm => vm.VariationNumber, (generate, number) =>  !generate || number > 0);
+            var validGeneration = this.WhenAnyValue(
+                vm => vm.GenerateVariation,
+                vm => vm.NumberOfIterations, 
+                vm => vm.PercentageChange,
+                (generate, iterations, percentageChange) =>  !generate || (iterations > 0 && percentageChange > 0));
+            //this.ValidationRule(x => x.percentageChange, x => float.TryParse(x, out float f));
             this.ValidationRule(validGeneration, "Generation settings are invalid");
         }
     }

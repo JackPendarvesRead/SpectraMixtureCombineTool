@@ -13,14 +13,14 @@ namespace SpectraMixtureCombineTool.Logic.Reader
 {
     internal sealed class SpectraReader
     {
-        public List<SpectrumData> Read(IEnumerable<SpectraFile> files, string sampleReference)
+        public List<AlchemySpectrumData> Read(IEnumerable<SpectraFile> files, string sampleReference)
         {
             var spectraFiles = ReadFiles(files, sampleReference);
             ValidateSpectra(spectraFiles);
             return spectraFiles.ToList();
         }
 
-        private IEnumerable<SpectrumData> ReadFiles(IEnumerable<SpectraFile> files, string sampleReference)
+        private IEnumerable<AlchemySpectrumData> ReadFiles(IEnumerable<SpectraFile> files, string sampleReference)
         {
             var reader = new FossSpectraReader();
             foreach (var file in files)
@@ -31,7 +31,7 @@ namespace SpectraMixtureCombineTool.Logic.Reader
                     spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient.ToString());
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
 
-                    var spectrumData = new SpectrumData(spectrum.Wavelengths, spectrum.Data, spectrum.SpectrumInformation)
+                    var spectrumData = new AlchemySpectrumData(spectrum.Wavelengths, spectrum.Data, spectrum.SpectrumInformation)
                     {
                         Inclusion = file.Coefficient,
                         Name = file.Ingredient,

@@ -8,12 +8,12 @@ namespace SpectraMixtureCombineTool.Logic.Infrastructure
     public class Mixture
     {
 
-        public Mixture(List<SpectrumData> spectra)
+        public Mixture(List<AlchemySpectrumData> spectra)
         {
             Spectra = spectra;
         }
 
-        public List<SpectrumData> Spectra { get; }
+        public List<AlchemySpectrumData> Spectra { get; }
 
         public int IngredientCount => Spectra.Where(x => x.FileType == SpectraFileType.Ingredient).Count();
         public int ConstantCount => Spectra.Where(x => x.FileType == SpectraFileType.Constant).Count();

@@ -4,6 +4,7 @@ using SpectraMixtureCombineTool.Logic.Infrastructure;
 using SpectraMixtureCombineTool.Logic.Workflow;
 using SpectraMixtureCombineTool.Service;
 using SpectraMixtureCombineTool.WPF.View;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -75,8 +76,10 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
                     sfd.Filter = "JCAMP|*.jcm";
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
+                        var settingsManager = Locator.Current.GetService<SettingsManager<UserSettings>>();
+                        var settings = settingsManager.LoadSettings();
                         var workflow = new Workflow();
-                        workflow.Execute(sfd.FileName, GetSpectraFiles());
+                        workflow.Execute(sfd.FileName, GetSpectraFiles(), settings.PercentageChange, settings.NumberOfIterations);
                         MessageBox.Show("Save successful.");
                     }
                 }

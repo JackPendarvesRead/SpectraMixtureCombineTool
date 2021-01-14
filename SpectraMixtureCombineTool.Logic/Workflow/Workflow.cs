@@ -12,7 +12,7 @@ namespace SpectraMixtureCombineTool.Logic.Workflow
 {
     public sealed class Workflow
     {
-        public void Execute(string filePath, IEnumerable<SpectraFile> files)
+        public void Execute(string filePath, IEnumerable<SpectraFile> files, float percentageChange, int numberOfIterations)
         {
             var reader = new SpectraReader();
             var sampleRef = Path.GetFileNameWithoutExtension(filePath);
@@ -21,7 +21,7 @@ namespace SpectraMixtureCombineTool.Logic.Workflow
             var mixture = new Mixture(spectra);
 
             var converter = new SpectrumConverter();
-            var weighted = converter.GetWeightedSpectra(mixture);
+            var weighted = converter.GetWeightedSpectra(mixture, percentageChange, numberOfIterations);
 
             var writer = new JcampFileWriter();
             writer.Write(filePath, weighted);

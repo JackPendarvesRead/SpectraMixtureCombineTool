@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Validation.Extensions;
 using SpectraMixtureCombineTool.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -20,23 +21,23 @@ namespace SpectraMixtureCombineTool.WPF.View
     /// </summary>
     public partial class SettingsWindow : ReactiveWindow<SettingsViewModel>
     {
-        private List<int> numbers = new List<int> { 1, 2, 3, 4, 5 }; 
+        private List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
 
         public SettingsWindow()
         {
             InitializeComponent();
             ViewModel = new SettingsViewModel();
-            NumberGeneratedComboBox.ItemsSource = numbers;
+            //NumberGeneratedComboBox.ItemsSource = numbers;
             this.WhenActivated(disposables =>
             {
                 this.Bind(ViewModel, vm => vm.GenerateVariation, view => view.GenerateVariationCheckBox.IsChecked).DisposeWith(disposables);
-                this.Bind(ViewModel, vm => vm.VariationNumber, view => view.NumberGeneratedComboBox.SelectedItem).DisposeWith(disposables);
+                this.Bind(ViewModel, vm => vm.PercentageChange, view => view.PercentageChange.Text).DisposeWith(disposables);
+                this.Bind(ViewModel, vm => vm.NumberOfIterations, view => view.NumberOfIterations.Text).DisposeWith(disposables);
 
                 this.BindCommand(ViewModel, vm => vm.OkCommand, view => view.OkButton).DisposeWith(disposables);
                 this.BindCommand(ViewModel, vm => vm.CancelCommand, view => view.CancelButton).DisposeWith(disposables);
 
-                if (this.NumberGeneratedComboBox.SelectedItem == null)
-                    this.NumberGeneratedComboBox.SelectedIndex = numbers[0];
+                this.BindValidation(ViewModel, view => view.ValidationErrorText.Text).DisposeWith(disposables);
 
                 ViewModel.OkCommand.Subscribe(success =>
                 {

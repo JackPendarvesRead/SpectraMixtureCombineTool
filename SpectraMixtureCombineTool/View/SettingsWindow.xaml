@@ -14,33 +14,38 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="5,5,5,5">
-            <Label Content="Custom Feedback Message" FontWeight="Bold" />
+            <Label Content="Variation Settings" FontWeight="Bold" />
             <CheckBox 
                 x:Name="GenerateVariationCheckBox"
                 VerticalContentAlignment="Center"                
                 HorizontalContentAlignment="Left">
                 <TextBlock Text="Generate simulated variation in spectra" TextWrapping="Wrap" />
             </CheckBox>
-            <StackPanel x:Name="GenerateVariationSettingsPanel">
-                
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Number generated" />
-                    <ComboBox x:Name="NumberGeneratedComboBox" Width="80"  />
-                    <!--<TextBox x:Name="NumberGenerated" Width="50" />-->
-                    
-                </StackPanel>
-                <TextBlock Text="This number will be generate this number of spectra each side of the original (e.g. if number=5 it will generate five spectra above and five below)" 
-                           TextWrapping="Wrap"
-                           FontSize="12"
-                           FontWeight="Light"
-                           FontStyle="Italic"
-                           Foreground="OrangeRed"
-                           Margin="0,0,0,10" />
-            </StackPanel>
+            <Grid x:Name="GenerateVariationSettingsPanel">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="% change in ingredient level" />
+                <TextBox Grid.Row="0" Grid.Column="1" 
+                         x:Name="PercentageChange" 
+                         Width="50" 
+                         Margin="0,1,0,1"
+                         HorizontalAlignment="Left" />
 
-
-            <Label Content="Some other setting" FontWeight="Bold" />
-            <TextBlock Text="This is where we can put some other settings if we choose to add any" TextWrapping="Wrap" />
+                <TextBlock Grid.Row="1" Grid.Column="0" 
+                           Text="Number of iterations" />
+                <TextBox Grid.Row="1" Grid.Column="1" 
+                         x:Name="NumberOfIterations" 
+                         Width="50"
+                         Margin="0,1,0,1"
+                         HorizontalAlignment="Left" />               
+            </Grid>
         </StackPanel>
 
         <StackPanel Grid.Row="1" >

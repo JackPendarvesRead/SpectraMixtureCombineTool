@@ -14,16 +14,16 @@ namespace SpectraMixtureCombineTool.Logic.Converter
 {
     internal sealed class SpectrumConverter
     {
-        public IEnumerable<SpectrumData> GetWeightedSpectra(Mixture mixture, int percentageChange = 10)
+        public IEnumerable<AlchemySpectrumData> GetWeightedSpectra(Mixture mixture, float percentageChange, int numberOfIterations)
         {
-            for (var i = -percentageChange; i <= percentageChange; i++)
+            for (var i = 0; i <= numberOfIterations; i++)
             {
-                float percentageCoefficient = (float)i / 100f;
+                float percentageCoefficient = (i + 1) * percentageChange / 100f;
                 yield return CalculateWeightedSpectrum(mixture, percentageCoefficient);
-            }            
+            }
         }
 
-        private SpectrumData CalculateWeightedSpectrum(Mixture mixture, float percentageCoefficient)
+        private AlchemySpectrumData CalculateWeightedSpectrum(Mixture mixture, float percentageCoefficient)
         {      
             var dic = mixture.Spectra.Select(x => x.SpectrumInformation).Merge();
 
@@ -53,10 +53,10 @@ namespace SpectraMixtureCombineTool.Logic.Converter
             var wavelengths = mixture.Spectra.Select(x => x.Wavelengths).First();
             dic[InformationConstants.SampleReference] = percentageCoefficient.ToString() + dic[InformationConstants.SampleReference];
 
-            return new SpectrumData(wavelengths, weightedSpectra, dic);
+            return new AlchemySpectrumData(wavelengths, weightedSpectra, dic);
         }
 
-        private float GetWeightedCoefficient(SpectrumData spectrumData, int fillerCount, int ingredientCount, float percentageCoefficient)
+        private float GetWeightedCoefficient(AlchemySpectrumData spectrumData, int fillerCount, int ingredientCount, float percentageCoefficient)
         {
             float adjustedPercentageCoefficient = spectrumData.FileType switch
             {
