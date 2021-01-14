@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -52,7 +53,38 @@ namespace SpectraMixtureCombineTool.View
                    ).DisposeWith(disposables);
 
                 SpectraFileType.SelectedItem = SpectraMixtureCombineTool.Logic.Infrastructure.SpectraFileType.Ingredient;
+
+                this.Coefficient.PreviewKeyDown += Coefficient_PreviewKeyDown;
+                this.Coefficient.PreviewTextInput += Coefficient_PreviewTextInput;
             });
+        }
+
+        private static readonly Regex allowedCharRegex = new Regex(@"[0-9.-]", RegexOptions.Compiled);
+        private void Coefficient_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var tb = (TextBox)sender;
+            if (!allowedCharRegex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+
+            if (e.Text == "-" && (tb.CaretIndex > 0 || tb.Text.Contains("-")))
+            {
+                e.Handled = true;
+            }
+
+            if (e.Text == "." && tb.Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Coefficient_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
