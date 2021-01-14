@@ -4,61 +4,110 @@
              xmlns:local="clr-namespace:SpectraMixtureCombineTool"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!--Control colors.-->
+        <Color x:Key="VistaLightBlue">#A2DCE7</Color>
+        <Color x:Key="VistaDarkBlue">#1D1F46</Color>
+
         <!-- Button style -->
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Width" Value="100" />
-            <Setter Property="Height" Value="30" />
+            <Setter Property="MinWidth" Value="100" />
+            <Setter Property="Height" Value="40" />
             <Setter Property="Margin" Value="5,5,5,5" />
             <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="ForceCursor" Value="True" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="#A2DCE7" />
+            <Setter Property="Foreground" Value="#1D1F46" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
 
         <!-- CheckBox Style-->
         <Style TargetType="{x:Type CheckBox}">
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Foreground" Value="#1D1F46" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+
+        <!-- ListBox Style -->
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+
+        <!-- Scrollviewer Style -->
+        <Style TargetType="{x:Type ScrollViewer}">
+            <Setter Property="CanContentScroll" Value="False" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
         </Style>
 
         <!-- Label Style-->
-        <Style TargetType="Label">
+        <Style TargetType="{x:Type Label}" x:Key="HeadingLabel">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <!--<Setter Property="Cursor" Value="IBeam" />-->
-            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="YellowGreen" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
-
-        <!-- TextBlock Style-->
-        <Style TargetType="TextBlock">
+        <Style TargetType="{x:Type Label}" x:Key="InfoLabel">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Cursor" Value="IBeam" />
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="FieldLabel">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Cursor" Value="IBeam" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
         </Style>
 
         <!-- TextBox Style-->
-        <Style TargetType="{x:Type TextBox}">
+        <Style x:Key="inputTextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Height" Value="25" />
             <Setter Property="Margin" Value="5,5,5,5" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black" />
             <Setter Property="Cursor" Value="IBeam" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
         </Style>
 
-        <!-- ComboBox Style-->
-        <Style TargetType="{x:Type ComboBox}">
+        <!-- TextBlock Style-->
+        <Style TargetType="{x:Type TextBlock}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Height" Value="25" />
             <Setter Property="Margin" Value="5,5,5,5" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Cursor" Value="IBeam" />
+            <Setter Property="FontFamily" Value="Gotham" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontStyle" Value="Normal" />
         </Style>
     </Application.Resources>
 </Application>
