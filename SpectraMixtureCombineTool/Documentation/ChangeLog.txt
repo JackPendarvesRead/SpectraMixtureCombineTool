@@ -11,3 +11,7 @@
 - Added inclusions of ignredients to the output of Jcamp (spectrum analysis update)
 - Removed text file writer which is no longer needed
 	
+1.2.0
+- Added AB Vista branding and styles
+- Added input restrictions on inclusion to just be numeric values
+- Added Serilog logging framework
