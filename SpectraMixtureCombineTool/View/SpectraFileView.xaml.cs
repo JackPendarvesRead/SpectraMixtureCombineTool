@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using SpectraMixtureCombineTool.ViewModel;
+using SpectraMixtureCombineTool.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpectraMixtureCombineTool.View
+namespace SpectraMixtureCombineTool.WPF.View
 {
     /// <summary>
     /// Interaction logic for SpectraFileView.xaml

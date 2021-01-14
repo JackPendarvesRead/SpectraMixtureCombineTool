@@ -13,7 +13,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SpectraMixtureCombineTool.ViewModel
+namespace SpectraMixtureCombineTool.WPF.ViewModel
 {
     public class MainWindowViewModel : ReactiveObject
     {

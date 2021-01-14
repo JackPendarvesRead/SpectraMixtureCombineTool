@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using Serilog;
-using SpectraMixtureCombineTool.View;
-using SpectraMixtureCombineTool.ViewModel;
+using SpectraMixtureCombineTool.WPF.View;
+using SpectraMixtureCombineTool.WPF.ViewModel;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -34,6 +34,7 @@ namespace SpectraMixtureCombineTool
 
             Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
             Locator.CurrentMutable.Register(() => new SpectraFileView(), typeof(IViewFor<SpectraFileViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingsViewModel(), typeof(IViewFor<SettingsWindow>));
 
             var window = new MainWindow();
             window.Show();

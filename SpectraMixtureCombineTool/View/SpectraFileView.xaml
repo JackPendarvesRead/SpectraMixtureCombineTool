@@ -1,8 +1,8 @@
 ﻿<rxui:ReactiveUserControl
-    x:Class="SpectraMixtureCombineTool.View.SpectraFileView"
+    x:Class="SpectraMixtureCombineTool.WPF.View.SpectraFileView"
     x:TypeArguments="vm:SpectraFileViewModel"
     xmlns:rxui="http://reactiveui.net"
-    xmlns:vm="clr-namespace:SpectraMixtureCombineTool.ViewModel"
+    xmlns:vm="clr-namespace:SpectraMixtureCombineTool.WPF.ViewModel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

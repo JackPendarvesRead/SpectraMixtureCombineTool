@@ -7,7 +7,7 @@ using System.IO;
 using System.Reactive.Linq;
 using System.Text;
 
-namespace SpectraMixtureCombineTool.ViewModel
+namespace SpectraMixtureCombineTool.WPF.ViewModel
 {
     public class SpectraFileViewModel : ReactiveObject
     {
