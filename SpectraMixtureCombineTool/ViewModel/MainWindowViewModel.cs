@@ -79,7 +79,7 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
                         var settingsManager = Locator.Current.GetService<SettingsManager<UserSettings>>();
                         var settings = settingsManager.LoadSettings();
                         var workflow = new Workflow();
-                        workflow.Execute(sfd.FileName, GetSpectraFiles(), settings.PercentageChange, settings.NumberOfIterations);
+                        workflow.Execute(sfd.FileName, GetSpectraFiles(), settings.PercentageChange, settings.GenerateVariation ? settings.NumberOfIterations : 0);
                         MessageBox.Show("Save successful.");
                     }
                 }

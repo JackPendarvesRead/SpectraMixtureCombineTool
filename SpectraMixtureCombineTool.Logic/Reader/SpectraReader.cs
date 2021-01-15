@@ -31,7 +31,7 @@ namespace SpectraMixtureCombineTool.Logic.Reader
                     spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient.ToString());
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
 
-                    var spectrumData = new AlchemySpectrumData(spectrum.Wavelengths, spectrum.Data, spectrum.SpectrumInformation)
+                    var spectrumData = new AlchemySpectrumData(spectrum.Wavelengths, spectrum.Data, spectrum.SpectrumInformation, spectrum.SpectrumReference, spectrum.InstrumentType, spectrum.InstrumentId, spectrum.XUnits, spectrum.YUnits)
                     {
                         Inclusion = file.Coefficient,
                         Name = file.Ingredient,

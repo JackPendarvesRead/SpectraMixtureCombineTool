@@ -2,6 +2,7 @@
 using Aunir.SpectrumAnalysis2.Interfaces;
 using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.JcampConnector;
+using Serilog;
 using SpectraMixtureCombineTool.Logic.Extension;
 using SpectraMixtureCombineTool.Logic.Infrastructure;
 using System;
@@ -16,15 +17,22 @@ namespace SpectraMixtureCombineTool.Logic.Converter
     {
         public IEnumerable<AlchemySpectrumData> GetWeightedSpectra(Mixture mixture, float percentageChange, int numberOfIterations)
         {
-            for (var i = 0; i <= numberOfIterations; i++)
+            yield return CalculateWeightedSpectrum(mixture, 0);
+            if(numberOfIterations > 0)
             {
-                float percentageCoefficient = (i + 1) * percentageChange / 100f;
-                yield return CalculateWeightedSpectrum(mixture, percentageCoefficient);
-            }
+                for (var i = 0; i <= numberOfIterations; i++)
+                {
+                    float percentageCoefficient = (i + 1) * percentageChange / 100f;
+                    yield return CalculateWeightedSpectrum(mixture, percentageCoefficient);
+                    yield return CalculateWeightedSpectrum(mixture, -percentageCoefficient);
+                }
+            }            
         }
 
         private AlchemySpectrumData CalculateWeightedSpectrum(Mixture mixture, float percentageCoefficient)
-        {      
+        {
+
+            Log.Debug("Calucating weighted spectrum for % change = {Percentage}", percentageCoefficient);
             var dic = mixture.Spectra.Select(x => x.SpectrumInformation).Merge();
 
             float coefficientSum = 0f;
@@ -52,8 +60,8 @@ namespace SpectraMixtureCombineTool.Logic.Converter
 
             var wavelengths = mixture.Spectra.Select(x => x.Wavelengths).First();
             dic[InformationConstants.SampleReference] = percentageCoefficient.ToString() + dic[InformationConstants.SampleReference];
-
-            return new AlchemySpectrumData(wavelengths, weightedSpectra, dic);
+            var mix1 = mixture.Spectra.First();
+            return new AlchemySpectrumData(wavelengths, weightedSpectra, dic, mix1.SpectrumReference, mix1.InstrumentType, mix1.InstrumentId, mix1.XUnits, mix1.YUnits);
         }
 
         private float GetWeightedCoefficient(AlchemySpectrumData spectrumData, int fillerCount, int ingredientCount, float percentageCoefficient)
