@@ -15,3 +15,9 @@
 - Added AB Vista branding and styles
 - Added input restrictions on inclusion to just be numeric values
 - Added Serilog logging framework
+
+1.3.0
+- Added Simon's Alchemy logo design
+- Added a settings window and logics to apply settings
+- Added a help window
+- Changed some variation calculation logics to be more intuitive

@@ -9,6 +9,12 @@
     Background="#A2DCE7">
     <Grid>
         <StackPanel>
+            <Label Content="FilePath" FontWeight="Bold" />
+            <TextBlock Text="The windows filepath to the spectra file selected" TextWrapping="Wrap" />
+            <Label Content="Ingredient" FontWeight="Bold" />
+            <TextBlock Text="The label which will be given to this constituent in the final mixture" TextWrapping="Wrap"/>
+            <Label Content="Inclusion" FontWeight="Bold" />
+            <TextBlock Text="The ratio value of this ingredient in the final mixture (before variation)" TextWrapping="Wrap" />
             <Label Content="Constituent types" FontWeight="Bold" />
             <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left">
                 <Run Text="Ingredient: " FontWeight="Bold" />
