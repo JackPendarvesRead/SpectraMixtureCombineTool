@@ -36,6 +36,7 @@
             <Button x:Name="ClearButton" Content="Clear" />
             <Button x:Name="SaveButton" Content="Save" />
             <Button x:Name="SettingsButton" Content="Settings" />
+            <Button x:Name="HelpButton" Content="Help" />
         </StackPanel>
 
         <ListBox

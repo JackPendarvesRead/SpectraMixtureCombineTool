@@ -40,4 +40,17 @@
     <Resource Include="Images\Alchemy.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="View\HelpWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\HelpWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

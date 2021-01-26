@@ -53,6 +53,11 @@ namespace SpectraMixtureCombineTool.WPF.View
                    vm => vm.SettingsCommand,
                    view => view.SettingsButton
                    ).DisposeWith(disposables);
+
+                this.BindCommand(ViewModel,
+                  vm => vm.HelpCommand,
+                  view => view.HelpButton
+                  ).DisposeWith(disposables);
             });
         }
     }

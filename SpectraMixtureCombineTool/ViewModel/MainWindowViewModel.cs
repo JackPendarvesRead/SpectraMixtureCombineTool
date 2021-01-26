@@ -23,6 +23,7 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
         public ReactiveCommand<Unit, Unit> SaveCommand { get; set; }
         public ReactiveCommand<Unit, Unit> ClearCommand { get; set; }
         public ReactiveCommand<Unit, Unit> SettingsCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> HelpCommand { get; set; }
 
         private readonly SpectraFileCache cache = new SpectraFileCache();
         private readonly ReadOnlyObservableCollection<SpectraFileViewModel> _files;
@@ -39,6 +40,13 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
             SaveCommand = ReactiveCommand.Create(SaveImpl);
             ClearCommand = ReactiveCommand.Create(ClearImpl);
             SettingsCommand = ReactiveCommand.Create(SettingCmdImpl);
+            HelpCommand = ReactiveCommand.Create(HelpCmdImpl);
+        }
+
+        private void HelpCmdImpl()
+        {
+            var window = new HelpWindow();
+            window.ShowDialog();
         }
 
         private void SettingCmdImpl()

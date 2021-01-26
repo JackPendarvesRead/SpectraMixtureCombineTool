@@ -35,6 +35,7 @@ namespace SpectraMixtureCombineTool.WPF
             Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
             Locator.CurrentMutable.Register(() => new SpectraFileView(), typeof(IViewFor<SpectraFileViewModel>));
             Locator.CurrentMutable.Register(() => new SettingsViewModel(), typeof(IViewFor<SettingsWindow>));
+            Locator.CurrentMutable.Register(() => new HelpViewModel(), typeof(IViewFor<HelpWindow>));
 
             var settingsManager = new SettingsManager<UserSettings>("AlchemyUserSettings.json", "Alchemy");
             Locator.CurrentMutable.RegisterConstant<SettingsManager<UserSettings>>(settingsManager);

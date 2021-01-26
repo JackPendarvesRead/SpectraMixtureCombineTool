@@ -1,0 +1,29 @@
+﻿<rxui:ReactiveWindow
+    xmlns:rxui="http://reactiveui.net" 
+    x:Class="SpectraMixtureCombineTool.WPF.View.HelpWindow"
+    x:TypeArguments="vm:HelpViewModel"
+    xmlns:vm="clr-namespace:SpectraMixtureCombineTool.WPF.ViewModel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Help" Height="600" Width="400"
+    Background="#A2DCE7">
+    <Grid>
+        <StackPanel>
+            <Label Content="Constituent types" FontWeight="Bold" />
+            <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left">
+                <Run Text="Ingredient: " FontWeight="Bold" />
+                <Run Text="Main ingredient of mixture. When variation is enabled, constituents labelled as ingredients inclusion will be changed by the % selected in settings." />
+                <LineBreak />
+                <Run Text="Filler: " FontWeight="Bold" />
+                <Run Text="Constituents added to mixture to make up to a total of 100%. The % inclusion of these constituents will be adjusted to make the total mixture up to 100%" />
+                <LineBreak />
+                <Run Text="Constant: " FontWeight="Bold" />
+                <Run Text="Any constituents labelled as constant will be set to a constant inclusion value regardless of variation." />
+            </TextBlock>
+        </StackPanel>
+        
+
+    </Grid>
+
+
+</rxui:ReactiveWindow>
