@@ -9,7 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     Background="WhiteSmoke"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Background="WhiteSmoke" Margin="5,5,5,5">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -24,22 +24,26 @@
         <Label Grid.Row="0" Grid.Column="0" 
                x:Name="FilePathLabel" Content="FilePath:" />
         <TextBlock Grid.Row="0" Grid.Column="1"
+                   Margin="2,2,2,2"
                    x:Name="FilePath" />
 
         <Label Grid.Row="1" Grid.Column="0" 
                x:Name="IngredientLabel" Content="Ingredient:" />
         <TextBox Grid.Row="1" Grid.Column="1"
                    x:Name="Ingredient"  
+                 Margin="2,2,2,2"
                  MinWidth="200"/>
 
         <Label Grid.Row="2" Grid.Column="0" 
                x:Name="CoefficientLabel" Content="Inclusion:" />
         <TextBox Grid.Row="2" Grid.Column="1"
-                   x:Name="Coefficient"  
+                   x:Name="Coefficient" 
+                 Margin="2,2,2,2"
                  MinWidth="200"/>
 
         <ComboBox Grid.Row="3" Grid.Column="1"
                   Width="200"
+                  Margin="2,2,2,2"
                   x:Name="SpectraFileType"
                   HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>
