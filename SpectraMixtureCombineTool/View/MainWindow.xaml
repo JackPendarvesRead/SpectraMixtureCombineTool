@@ -29,20 +29,14 @@
                     <BitmapImage DecodePixelHeight="80" UriSource="/Images/ABVistaLogo.png" />
                 </Image.Source>
             </Image>
-        </Grid>        
-        
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Button x:Name="AddButton" Content="Add" />
-                <Button x:Name="ClearButton" Content="Clear" />
-                <Button x:Name="SaveButton" Content="Save" />
-                <Button x:Name="SettingsButton" Content="Settings" />
-            </StackPanel>
         </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,5,5,5">
+            <Button x:Name="AddButton" Content="Add" />
+            <Button x:Name="ClearButton" Content="Clear" />
+            <Button x:Name="SaveButton" Content="Save" />
+            <Button x:Name="SettingsButton" Content="Settings" />
+        </StackPanel>
 
         <ListBox
             Grid.Row="2"
