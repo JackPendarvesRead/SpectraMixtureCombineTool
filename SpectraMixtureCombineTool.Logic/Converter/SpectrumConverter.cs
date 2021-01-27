@@ -20,7 +20,7 @@ namespace SpectraMixtureCombineTool.Logic.Converter
             yield return CalculateWeightedSpectrum(mixture, 0);
             if(numberOfIterations > 0)
             {
-                for (var i = 0; i <= numberOfIterations; i++)
+                for (var i = 0; i < numberOfIterations; i++)
                 {
                     float percentageCoefficient = (i + 1) * percentageChange / 100f;
                     yield return CalculateWeightedSpectrum(mixture, percentageCoefficient);
