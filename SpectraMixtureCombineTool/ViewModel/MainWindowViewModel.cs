@@ -64,16 +64,18 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
         {
             try
             {
+                var settingsManager = Locator.Current.GetService<SettingsManager<UserSettings>>();
+                var settings = settingsManager.LoadSettings();
                 var fillerCount = Files.Where(x => x.FileType == SpectraFileType.Filler).Count();
                 var ingredientCount = Files.Where(x => x.FileType == SpectraFileType.Ingredient).Count();
-                if (fillerCount == 0 || ingredientCount == 0)
+                if (settings.GenerateVariation && (fillerCount == 0 || ingredientCount == 0))
                 {
                     var msg = MessageBox.Show(
                         "There was either no ingredient or no filler selected. Do you want to continue without adding any?", 
                         "Missing Ingredient Types", 
-                        MessageBoxButtons.OKCancel, 
+                        MessageBoxButtons.YesNo, 
                         MessageBoxIcon.Warning);
-                    if(msg != DialogResult.OK)
+                    if(msg != DialogResult.Yes)
                     {
                         return;
                     }                
@@ -83,9 +85,7 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
                 {
                     sfd.Filter = "JCAMP|*.jcm";
                     if (sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        var settingsManager = Locator.Current.GetService<SettingsManager<UserSettings>>();
-                        var settings = settingsManager.LoadSettings();
+                    {                        
                         var workflow = new Workflow();
                         workflow.Execute(sfd.FileName, GetSpectraFiles(), settings.PercentageChange, settings.GenerateVariation ? settings.NumberOfIterations : 0);
                         MessageBox.Show("Save successful.");
