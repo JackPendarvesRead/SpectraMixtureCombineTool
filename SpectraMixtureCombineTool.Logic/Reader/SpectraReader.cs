@@ -1,7 +1,10 @@
-﻿using Aunir.SpectrumAnalysis2.FossConnector;
+﻿using Aunir.SpectrumAnalysis2.Core.Connectors;
+using Aunir.SpectrumAnalysis2.Core.Default;
+using Aunir.SpectrumAnalysis2.FossConnector;
 using Aunir.SpectrumAnalysis2.Interfaces;
 using Aunir.SpectrumAnalysis2.Interfaces.Constants;
 using Aunir.SpectrumAnalysis2.JcampConnector;
+using Serilog;
 using SpectraMixtureCombineTool.Logic.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -22,11 +25,20 @@ namespace SpectraMixtureCombineTool.Logic.Reader
 
         private IEnumerable<AlchemySpectrumData> ReadFiles(IEnumerable<SpectraFile> files, string sampleReference)
         {
-            var reader = new FossSpectraReader();
+            var controller = new ReflectionConnectorController();
+            controller.Initialise();
             foreach (var file in files)
             {
                 using (var stream = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Delete))
-                {                    
+                {
+                    
+                    var fileType = controller.IdentifyFile(stream);
+                    if (fileType == null)
+                    {
+                        throw new Exception("File type not recognised by Spectrum Reader");
+                    }
+                    Log.Debug("Read filetype: {SpectraFileType}", fileType.TypeName);
+                    var reader = controller.GetReaderForFileType(fileType).GenerateReader(new DelegateInformationProvider(_ => new Dictionary<string, string>()));
                     ISpectrumData spectrum = reader.ReadStream(stream).First();
                     spectrum.SpectrumInformation.Add(JcampInformationConstants.Ingredient + file.Ingredient, file.Coefficient.ToString());
                     spectrum.SpectrumInformation[InformationConstants.SampleReference] = sampleReference;
