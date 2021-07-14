@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using SpectraMixtureCombineTool.WPF.ViewModel;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
@@ -51,6 +52,14 @@ namespace SpectraMixtureCombineTool.WPF.View
                    vm => vm.FileType,
                    view => view.SpectraFileType.SelectedItem
                    ).DisposeWith(disposables);
+
+                //var settingsManager = Locator.Current.GetService<SettingsManager<UserSettings>>();
+                //var settings = settingsManager.LoadSettings();
+                //if (!settings.GenerateVariation)
+                //{
+                //    SpectraFileType.Visibility = Visibility.Collapsed;
+                //    SpectaFileTypeLabel.Visibility = Visibility.Collapsed;
+                //}
 
                 SpectraFileType.SelectedItem = SpectraMixtureCombineTool.Logic.Infrastructure.SpectraFileType.Ingredient;
 

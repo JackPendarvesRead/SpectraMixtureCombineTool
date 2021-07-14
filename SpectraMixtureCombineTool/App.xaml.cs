@@ -29,7 +29,7 @@ namespace SpectraMixtureCombineTool.WPF
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File(@"Logs\AlchemyApplicationLogs.log")
+                .WriteTo.File(@"Logs\FormulaCheckApplicationLogs.log")
                 .CreateLogger();
 
             Locator.CurrentMutable.Register(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
@@ -37,7 +37,7 @@ namespace SpectraMixtureCombineTool.WPF
             Locator.CurrentMutable.Register(() => new SettingsViewModel(), typeof(IViewFor<SettingsWindow>));
             Locator.CurrentMutable.Register(() => new HelpViewModel(), typeof(IViewFor<HelpWindow>));
 
-            var settingsManager = new SettingsManager<UserSettings>("AlchemyUserSettings.json", "Alchemy");
+            var settingsManager = new SettingsManager<UserSettings>("FormulaCheckUserSettings.json", "Alchemy");
             Locator.CurrentMutable.RegisterConstant<SettingsManager<UserSettings>>(settingsManager);
 
             var window = new MainWindow();

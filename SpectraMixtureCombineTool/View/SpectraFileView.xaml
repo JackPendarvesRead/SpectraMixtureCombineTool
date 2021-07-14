@@ -41,7 +41,7 @@
                  Margin="2,2,2,2"
                  MinWidth="200"/>
 
-        <Label Grid.Row="3" Grid.Column="0"  Content="Type:" />
+        <Label Grid.Row="3" Grid.Column="0" x:Name="SpectaFileTypeLabel" Content="Type:" />
         <ComboBox Grid.Row="3" Grid.Column="1"
                   Width="200"
                   Margin="2,2,2,2"
