@@ -117,7 +117,7 @@ namespace SpectraMixtureCombineTool.WPF.ViewModel
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Multiselect = true;
-                ofd.Filter = "Foss Spectra File|*.nir";
+                ofd.Filter = "Foss Spectra File|*.nir|All file types|*.*";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     foreach(var file in ofd.FileNames)
